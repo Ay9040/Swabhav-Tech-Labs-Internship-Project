@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <title>Admin Register</title>
+    </head>
+    <style>
+        button {
+            margin: 10px;
+        }
+
+        .operationsDiv {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .addModifyOperationsDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deleteOperationsDiv {
+            display: flex;
+            flex-direction: column;
+        }
+
+    </style>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="/">Book</a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                </ul>
+            </div>
+        </nav>
+
+        <div class="operationsDiv">
+            <div class="addModifyOperationsDiv">
+                <button class="btn btn-success" data-toggle="modal" data-target="#addVenueModal">Add/Modify
+                    Venue</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addStallModal">Add/Modify
+                    Stall</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addEventModal">Add/Modify
+                    Event</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addVisitorModal">Add/Modify
+                    Visitor</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addExhibitorModal">Add/Modify
+                    Exhibitor</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addBooking">Add/Modify
+                    Booking</button>
+            </div>
+            <div class="deleteOperationsDiv">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteVenueModal">Delete
+                    Venue</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteStallModal">Delete
+                    Stall</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal">Delete
+                    Event</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteVisitorModal">Delete
+                    Visitor</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteExhibitorModal">Delete
+                    Exhibitor</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteBooking">Delete Booking</button>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="addVenueModal" tabindex="-1" role="dialog" aria-labelledby="addVenueModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addVenueModalLabel">Add/Modify Venue</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">City Name</span>
+                                </div>
+                                <input name="venueCity" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                                </div>
+                                <input name="venueAddress" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Country Name</span>
+                                </div>
+                                <input name="venueCountry" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">State Name</span>
+                                </div>
+                                <input name="venueState" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addStallModal" tabindex="-1" role="dialog" aria-labelledby="addStallModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addStallModalLabel">Add/Modify Stall</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Stall No.</span>
+                                </div>
+                                <input name="stallNo" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+                                </div>
+                                <input name="stallPrice" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Stall Size</span>
+                                </div>
+                                <input name="stallSize" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addEventModalLabel">Add/Modify Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Event Name</span>
+                                </div>
+                                <input name="eventName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Booking Start
+                                        Date</span>
+                                </div>
+                                <input name="eventBookingStartDate" type="text" class="form-control"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Start Date</span>
+                                </div>
+                                <input name="eventStartDate" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">End Date</span>
+                                </div>
+                                <input name="eventEndDate" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Venue</span>
+                                </div>
+                                <input name="eventVenueName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addVisitorModal" tabindex="-1" role="dialog" aria-labelledby="addVisitorModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addVisitorModalLabel">Add/Modify Visitor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">First Name</span>
+                                </div>
+                                <input name="visitorFirstName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Last Name</span>
+                                </div>
+                                <input name="visitorLastName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                                </div>
+                                <input name="visitorAddress" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">PIN</span>
+                                </div>
+                                <input name="visitorPIN" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Mobile No.</span>
+                                </div>
+                                <input name="visitorMobile" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Email ID</span>
+                                </div>
+                                <input name="visitorEmail" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
+                                </div>
+                                <input name="visitorBirthdate" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
+                                </div>
+                                <input name="visitorGender" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addExhibitorModal" tabindex="-1" role="dialog"
+            aria-labelledby="addExhibitorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addExhibitorModalLabel">Add/Modify Exhibitor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor Name</span>
+                                </div>
+                                <input name="exhibitorFirstName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                                </div>
+                                <input name="exhibitorEmail" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
+                                </div>
+                                <input name="exhibitorPhone" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Company Name</span>
+                                </div>
+                                <input name="exhibitorCompanyName" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Company
+                                        Description</span>
+                                </div>
+                                <input name="exhibitorCompanyDescription" type="text" class="form-control"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                                </div>
+                                <input name="exhibitorAddress" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Industry</span>
+                                </div>
+                                <input name="exhibitorIndustry" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+                                </div>
+                                <input name="exhibitorCountry" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">State</span>
+                                </div>
+                                <input name="exhibitorState" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addBooking" tabindex="-1" role="dialog" aria-labelledby="addBookingLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addBookingLabel">Add/Modify Booking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Amount Spent</span>
+                                </div>
+                                <input name="bookingAmount" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Spend Date</span>
+                                </div>
+                                <input name="bookingDate" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Payment Mode</span>
+                                </div>
+                                <input name="bookingPaymentMethod" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Event</span>
+                                </div>
+                                <input name="bookingEvent" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Visitor</span>
+                                </div>
+                                <input name="bookingVisitor" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
+                                </div>
+                                <input name="bookingExhibitor" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
