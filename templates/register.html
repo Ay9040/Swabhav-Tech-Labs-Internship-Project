@@ -42,7 +42,9 @@
                 </ul>
             </div>
         </nav>
-
+        <div>
+            {{message}}
+        </div>
         <div class="operationsDiv">
             <div class="addModifyOperationsDiv">
                 <button class="btn btn-success" data-toggle="modal" data-target="#addVenueModal">Add/Modify
@@ -114,8 +116,8 @@
                                 <input name="venueState" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addVenue"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateVenue"></input>
                         </form>
                     </div>
                 </div>
@@ -162,8 +164,8 @@
                                 <input name="stallEvent" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addStall"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateStall"></input>
                         </form>
                     </div>
                 </div>
@@ -218,8 +220,8 @@
                                 <input name="eventVenueName" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addEvent"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateEvent"></input>
                         </form>
                     </div>
                 </div>
@@ -294,8 +296,8 @@
                                 <input name="visitorGender" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addVisitor"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateVisitor"></input>
                         </form>
                     </div>
                 </div>
@@ -385,8 +387,8 @@
                                 <input name="exhibitorState" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addExhibitor"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateExhibitor"></input>
                         </form>
                     </div>
                 </div>
@@ -447,8 +449,8 @@
                                 <input name="bookingExhibitor" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addBooking"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateBooking"></input>
                         </form>
                     </div>
                 </div>
