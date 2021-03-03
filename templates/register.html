@@ -9,7 +9,14 @@
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="../static/css/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <title>Admin Register</title>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+        <title>Admin</title>
     </head>
     <style>
         button {
@@ -35,6 +42,65 @@
     </style>
 
     <body>
+        <script>
+            $('#eventBookingStartDate').ready(function () {
+                var date_input = $('input[name="eventBookingStartDate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
+            $('#eventStartDate').ready(function () {
+                var date_input = $('input[name="eventStartDate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
+            $('#eventEndDate').ready(function () {
+                var date_input = $('input[name="eventEndDate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
+            $('#visitorBirthdate').ready(function () {
+                var date_input = $('input[name="visitorBirthdate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
+
+            $('#bookingDate').ready(function () {
+                var date_input = $('input[name="bookingDate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
+        </script>
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="/">Book</a>
             <div class="collapse navbar-collapse" id="navbarText">
@@ -71,10 +137,222 @@
                     Visitor</button>
                 <button class="btn btn-danger" data-toggle="modal" data-target="#deleteExhibitorModal">Delete
                     Exhibitor</button>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteBooking">Delete Booking</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteBookingModal">Delete
+                    Booking</button>
             </div>
         </div>
 
+
+        <div class="modal fade" id="deleteVenueModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteVenueModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteVenueModalLabel">Delete Venue</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Venue</span>
+                                </div>
+                                <select name="deleteVenue" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for venue in venues %}
+                                    <option>{{ venue[0]}}. {{ venue[2] }}, {{ venue[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteVenue"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteStallModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteStallModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteStallModalLabel">Delete Stall</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Stall</span>
+                                </div>
+                                <select name="deleteStall" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for stall in stalls %}
+                                    <option>{{ stall[0]}}. Stall {{ stall[1] }}, Event: {{ stall[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteStall"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteEventModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteEventModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteStallModalLabel">Delete Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Event</span>
+                                </div>
+                                <select name="deleteEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[0]}}. {{ event[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteEvent"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteVisitorModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteVisitorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteVisitorModalLabel">Delete Event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Visitor</span>
+                                </div>
+                                <select name="deleteVisitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for visitor in visitors %}
+                                    <option>{{ visitor[0]}}. {{ visitor[1] }} {{ visitor[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteEvent"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteBookingModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteBookingModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteBookingModalLabel">Delete Booking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
+                                </div>
+                                <select name="deleteBookingExhibitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for exhibitor in exhibitors %}
+                                    <option>{{ exhibitor[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Event</span>
+                                </div>
+                                <select name="deleteBookingEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Stall No.</span>
+                                </div>
+                                <input name="deleteBookingStall" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteBooking"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="deleteExhibitorModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteExhibitorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteExhibitorModalLabel">Delete Exhibitor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
+                                </div>
+                                <select name="deleteExhibitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for exhibitor in exhibitors %}
+                                    <option>{{ exhibitor[0]}}. {{ exhibitor[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteExhibitor"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="modal fade" id="addVenueModal" tabindex="-1" role="dialog" aria-labelledby="addVenueModalLabel"
             aria-hidden="true">
@@ -116,8 +394,10 @@
                                 <input name="venueState" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addVenue"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateVenue"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addVenue"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateVenue"></input>
                         </form>
                     </div>
                 </div>
@@ -161,11 +441,18 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Event Name</span>
                                 </div>
-                                <input name="stallEvent" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="stallEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[1]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addStall"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateStall"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addStall"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateStall"></input>
                         </form>
                     </div>
                 </div>
@@ -191,7 +478,7 @@
                                 <input name="eventName" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="eventBookingStartDate">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Booking Start
                                         Date</span>
@@ -199,14 +486,14 @@
                                 <input name="eventBookingStartDate" type="text" class="form-control"
                                     aria-label="Default" aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="eventStartDate">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Start Date</span>
                                 </div>
                                 <input name="eventStartDate" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="eventEndDate">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">End Date</span>
                                 </div>
@@ -217,11 +504,22 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Venue</span>
                                 </div>
-                                <input name="eventVenueName" type="text" class="form-control" aria-label="Default"
+                                <select name="eventVenueName" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for venue in venues %}
+                                    <option>{{ venue[0]}}. {{ venue[2] }}, {{ venue[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                                <!--
+                                <input name="eventVenueName" type="dropdown" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
+                                -->
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addEvent"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateEvent"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addEvent"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateEvent"></input>
                         </form>
                     </div>
                 </div>
@@ -282,7 +580,7 @@
                                 <input name="visitorEmail" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="visitorBirthdate">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Date of Birth</span>
                                 </div>
@@ -293,11 +591,16 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Gender</span>
                                 </div>
-                                <input name="visitorGender" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="visitorGender" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Female</option>
+                                    <option>Male</option>
+                                </select>
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addVisitor"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateVisitor"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addVisitor"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateVisitor"></input>
                         </form>
                     </div>
                 </div>
@@ -320,7 +623,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor Name</span>
                                 </div>
-                                <input name="exhibitorFirstName" type="text" class="form-control" aria-label="Default"
+                                <input name="exhibitorName" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="input-group mb-3">
@@ -387,8 +690,10 @@
                                 <input name="exhibitorState" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addExhibitor"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateExhibitor"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addExhibitor"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateExhibitor"></input>
                         </form>
                     </div>
                 </div>
@@ -407,59 +712,54 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3" id="bookingDate">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Amount Spent</span>
-                                </div>
-                                <input name="bookingAmount" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Spend Date</span>
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Booking Date</span>
                                 </div>
                                 <input name="bookingDate" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Payment Mode</span>
-                                </div>
-                                <input name="bookingPaymentMethod" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Event</span>
                                 </div>
-                                <input name="bookingEvent" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Visitor</span>
-                                </div>
-                                <input name="bookingVisitor" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="bookingEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[1]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
                                 </div>
-                                <input name="bookingExhibitor" type="text" class="form-control" aria-label="Default"
+                                <select name="bookingExhibitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for exhibitor in exhibitors %}
+                                    <option>{{ exhibitor[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Stall No.</span>
+                                </div>
+                                <input name="bookingStall" type="text" class="form-control" aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default">
                             </div>
-                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger" formaction="/addBooking"></input>
-                            <input name="btn" type="submit" value="Modify" class="btn btn-danger" formaction="/updateBooking"></input>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addBooking"></input>
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateBooking"></input>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-            crossorigin="anonymous"></script>
     </body>
 
 </html>
