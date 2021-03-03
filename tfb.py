@@ -20,11 +20,21 @@ try:
         venues = cursor.fetchall()
         return venues
 
+    def getTransactions():
+        cursor.execute("SELECT m.id, first_name, last_name, exhibitor_name,spend, spend_date FROM megaconsumercard m LEFT JOIN Visitor v on m.visitor_id=v.id LEFT JOIN booking b on b.id = m.booking_id LEFT JOIN exhibitor e on b.exhibitor_id=e.id;")
+        transactions = cursor.fetchall()
+        return transactions
+
     def getStalls():
         cursor.execute(
             "SELECT s.id, stall_no, event_name from Stall s LEFT JOIN eventtable e on s.event_id = e.id")
         stalls = cursor.fetchall()
         return stalls
+
+    def getBookings():
+        cursor.execute("SELECT b.id, event_name, exhibitor_name, stall_no from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
+        bookings = cursor.fetchall()
+        return bookings
 
     def getEvents():
         cursor.execute("SELECT id, event_name FROM eventtable")
@@ -59,8 +69,9 @@ try:
         exhibitor_id = cursor.fetchone()
         return exhibitor_id[0]
 
-    def stallId(stall):
-        cursor.execute("SELECT id FROM STALL WHERE stall_no=" + stall + ";")
+    def stallId(stall, event_id):
+        cursor.execute("SELECT id FROM STALL WHERE stall_no=" +
+                       str(stall) + " AND event_id=" + str(event_id) + ";")
         stall_id = cursor.fetchone()
         return stall_id[0]
 
@@ -104,7 +115,7 @@ try:
     def deleteBooking(exhibitor, event, stall_no):
         exhibitor_id = exhibitorID(exhibitor)
         event_id = eventID(event)
-        stall_id = stallId(stall_no)
+        stall_id = stallId(stall_no, event_id)
         query = "SELECT b.id FROM booking b LEFT JOIN BookingStallMap m ON b.id = m.booking_id WHERE b.exhibitor_id=" + \
             str(exhibitor_id) + " AND b.event_id=" + str(event_id) + \
             " AND m.stall_id=" + str(stall_id) + ";"
@@ -113,10 +124,33 @@ try:
         delById("Booking", str(bid))
 
     def updateVenue(vid, address, city, state_id, country_id):
-        query = "UPDATE contact SET address='"+address+"',city_name='"+city+"',state_id=" + \
-            str(state_id)+"',country_id=" + \
+        query = "UPDATE venue SET address='"+address+"',city='"+city+"',state_id=" + \
+            str(state_id)+",country_id=" + \
             str(country_id)+" WHERE id="+str(vid)+";"
         # print(query)
+        cursor.execute(query)
+        con.commit()
+
+    def addTransaction(spend, spend_date, payment_method, event_id, exhibitor_id, visitor_id):
+        query = "SELECT id from booking WHERE exhibitor_id=" + \
+            str(exhibitor_id) + " AND event_id=" + str(event_id) + ";"
+        cursor.execute(query)
+        bid = cursor.fetchone()
+        query = "INSERT INTO megaconsumercard(spend, spend_date, payment_mode, event_id, booking_id, visitor_id) VALUES(" + \
+                str(spend) + ",'" + str(spend_date) + "','" + str(payment_method) + \
+            "'," + str(event_id) + "," + \
+            str(bid[0]) + "," + str(visitor_id) + ");"
+        cursor.execute(query)
+        con.commit()
+
+    def updateTransaction(transaction_id, spend, spend_date, payment_method, event_id, exhibitor_id, visitor_id):
+        query = "SELECT id from booking WHERE exhibitor_id=" + \
+            str(exhibitor_id) + " AND event_id=" + str(event_id) + ";"
+        cursor.execute(query)
+        bid = cursor.fetchone()
+        query = "UPDATE megaconsumercard SET spend=" + str(spend) + ", spend_date='" + str(spend_date) + "', payment_mode='" + str(payment_method) + "', event_id=" + \
+                str(event_id) + ", booking_id=" + str(bid[0]) + ", visitor_id=" + str(
+                    visitor_id) + " WHERE id=" + str(transaction_id) + ";"
         cursor.execute(query)
         con.commit()
 
@@ -140,9 +174,9 @@ try:
         # cursor.execute(query)
         # con.commit()
 
-    def updateStall(sid, stall_no, price, stall_size, isBooked, event_id):
-        query = "UPDATE address SET stall_no="+str(stall_no)+",price="+str(price)+",stall_size="+str(
-            stall_size)+",isBooked="+str(isBooked)+",event_id='"+str(event_id)+"' WHERE id="+str(sid)+";"
+    def updateStall(sid, stall_no, price, stall_size, event_id):
+        query = "UPDATE Stall SET stall_no="+str(stall_no)+",price="+str(price)+",stall_size="+str(
+            stall_size)+",event_id='"+str(event_id)+"' WHERE id="+str(sid)+";"
         cursor.execute(query)
         con.commit()
 
@@ -166,9 +200,9 @@ try:
         con.commit()
         """
 
-    def updateEvent(eid, event_name, booking_start_date, start_date, end_date, venue_id):
-        query = "UPDATE EventTable SET stall_no='"+event_name+"',price="+str(booking_start_date)+",start_date="+str(
-            start_date)+",end_date="+str(end_date)+",venue_id="+str(venue_id)+" WHERE id="+str(eid)+";"
+    def updateEvent(event_id, event_name, booking_start_date, start_date, end_date, venue_id):
+        query = "UPDATE EventTable SET event_name='" + str(event_name) + "',booking_start_date='"+str(booking_start_date)+"', start_date='"+str(
+            start_date)+"', end_date='"+str(end_date)+"', venue_id="+str(venue_id)+" WHERE id='"+str(event_id)+"';"
         cursor.execute(query)
         con.commit()
 
@@ -194,9 +228,9 @@ try:
         """
 
     def updateVisitor(vis_id, first_name, last_name, address, pincode, mobile_no, emailid, dob, gender):
-        query = "UPDATE address SET first_name='"+first_name+"',last_name='"+last_name+"',address='"+address+"',pincode=" + \
-            str(pincode)+",mobile_no="+str(mobile_no)+",emailid='"+emailid + \
-            "',dob="+str(dob)+",gender="+str(gender) + \
+        query = "UPDATE visitor SET first_name='"+first_name+"',last_name='"+last_name+"',address='"+address+"',pincode=" + \
+            str(pincode)+",mobile_no='"+str(mobile_no)+"',email_id='"+emailid + \
+            "',dob='"+str(dob)+"',gender="+str(gender) + \
             " WHERE id="+str(vis_id)+";"
         cursor.execute(query)
         con.commit()
@@ -223,7 +257,7 @@ try:
         """
 
     def updateExhibitor(exid, exibitor_name, email, phoneno, company_name, company_description, address, pincode, industry_id, country_id, state_id):
-        query = "UPDATE Exhibitor SET exihibitor_name='"+exibitor_name+"',email='"+email+"',phoneno="+str(phoneno)+",company_name='"+company_name+"',company_description='"+company_description+"',address='"+address+",pincode="+str(
+        query = "UPDATE Exhibitor SET exhibitor_name='"+exibitor_name+"',email='"+email+"',phoneno="+str(phoneno)+",company_name='"+company_name+"',company_description='"+company_description+"',address='"+address+"',pincode="+str(
             pincode)+",industry_id="+str(industry_id)+",country_id="+str(country_id)+",state_id="+str(state_id)+" WHERE id="+str(exid)+";"
         cursor.execute(query)
         con.commit()
@@ -235,25 +269,37 @@ try:
         while(sid in sid_list):
             sid+=1
         """
+        query = "SELECT price, isBooked FROM stall WHERE id=" + str(stall_id)
+        cursor.execute(query)
+        stall_details = cursor.fetchone()
+        print(stall_details)
+        if stall_details[1] == 0:
+            query = "INSERT INTO Booking(booking_date,total_amount,event_id, exhibitor_id) VALUES('"+str(
+                booking_date)+"',"+str(stall_details[0])+","+str(event_id)+","+str(exhibitor_id)+");"
+            print(query)
+            cursor.execute(query)
+            con.commit()
+            bid_list = getIds('Booking')
+            booking_id = max(bid_list)[0]
+            query = "INSERT INTO BookingStallMap(booking_id,event_id,stall_id) VALUES(" + str(
+                booking_id)+","+str(event_id)+"," + str(stall_id) + ");"
+            print(query)
+            cursor.execute(query)
+            con.commit()
+            query = "UPDATE stall SET isBooked=1 WHERE id=" + \
+                str(stall_id) + ";"
+            print(query)
+            cursor.execute(query)
+            con.commit()
+        else:
+            return -1
+
+    def updateBooking(bid, booking_date, event_id, exhibitor_id, stall_id):
         query = "SELECT price FROM stall WHERE id=" + str(stall_id)
         cursor.execute(query)
         total_amount = cursor.fetchone()
-        query = "INSERT INTO Booking(booking_date,total_amount,event_id, exhibitor_id) VALUES('"+str(
-            booking_date)+"',"+str(total_amount[0])+","+str(event_id)+","+str(exhibitor_id)+");"
-        print(query)
-        cursor.execute(query)
-        con.commit()
-        bid_list = getIds('Booking')
-        booking_id = max(bid_list)[0]
-        query = "INSERT INTO BookingStallMap(booking_id,event_id,stall_id) VALUES(" + str(
-            booking_id)+","+str(event_id)+"," + str(stall_id) + ");"
-        print(query)
-        cursor.execute(query)
-        con.commit()
-
-    def updateBooking(bid, booking_date, total_amount, isBooked, event_id):
-        query = "UPDATE Booking SET booking_date="+str(booking_date)+",total_amount="+str(
-            total_amount)+",isBooked="+str(isBooked)+",event_id="+str(event_id)+" WHERE id="+str(bid)+";"
+        query = "UPDATE Booking SET booking_date='"+str(booking_date)+"',total_amount="+str(
+            total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
 

@@ -99,6 +99,18 @@
                 };
                 date_input.datepicker(options);
             });
+
+            $('#transactionSpendDate').ready(function () {
+                var date_input = $('input[name="transactionSpendDate"]'); //our date input has the name "date"
+                var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                var options = {
+                    format: 'yyyy-mm-dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                };
+                date_input.datepicker(options);
+            });
         </script>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -123,8 +135,10 @@
                     Visitor</button>
                 <button class="btn btn-success" data-toggle="modal" data-target="#addExhibitorModal">Add/Modify
                     Exhibitor</button>
-                <button class="btn btn-success" data-toggle="modal" data-target="#addBooking">Add/Modify
+                <button class="btn btn-success" data-toggle="modal" data-target="#addBookingModal">Add/Modify
                     Booking</button>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addMegaConsumerModal">Add/Modify
+                    Mega Consumer Card Transaction</button>
             </div>
             <div class="deleteOperationsDiv">
                 <button class="btn btn-danger" data-toggle="modal" data-target="#deleteVenueModal">Delete
@@ -139,6 +153,8 @@
                     Exhibitor</button>
                 <button class="btn btn-danger" data-toggle="modal" data-target="#deleteBookingModal">Delete
                     Booking</button>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteMegaConsumerModal">Delete
+                    Mega Consumer Card Transaction</button>
             </div>
         </div>
 
@@ -175,6 +191,40 @@
             </div>
         </div>
 
+        <div class="modal fade" id="deleteMegaConsumerModal" tabindex="-1" role="dialog"
+            aria-labelledby="deleteMegaConsumerModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteMegaConsumerModalLabel">Delete Mega Consumer Card Transaction
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Transaction</span>
+                                </div>
+                                <select name="deleteTransaction" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for transaction in transactions %}
+                                    <option>{{ transaction[0]}}. {{ transaction[1] }} {{ transaction[2] }} at {{
+                                        transaction[3] }} spent {{ transaction[4] }} on {{ transaction[5] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Delete" class="btn btn-danger"
+                                formaction="/deleteTransaction"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal fade" id="deleteStallModal" tabindex="-1" role="dialog"
             aria-labelledby="deleteStallModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -195,7 +245,7 @@
                                     aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                     <option selected>Choose...</option>
                                     {% for stall in stalls %}
-                                    <option>{{ stall[0]}}. Stall {{ stall[1] }}, Event: {{ stall[2] }}</option>
+                                    <option>{{ stall[0]}}. Stall no. {{ stall[1] }}, Event: {{ stall[2] }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -244,7 +294,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteVisitorModalLabel">Delete Event</h5>
+                        <h5 class="modal-title" id="deleteVisitorModalLabel">Delete Visitor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -368,6 +418,18 @@
                         <form method="POST">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify Venue</span>
+                                </div>
+                                <select name="modifyVenue" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for venue in venues %}
+                                    <option>{{ venue[0]}}. {{ venue[2] }}, {{ venue[1] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">City Name</span>
                                 </div>
                                 <input name="venueCity" type="text" class="form-control" aria-label="Default"
@@ -416,6 +478,18 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify Stall</span>
+                                </div>
+                                <select name="modifyStall" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for stall in stalls %}
+                                    <option>{{ stall[0]}}. Stall no. {{ stall[1] }}, Event: {{ stall[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Stall No.</span>
@@ -471,6 +545,18 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify Event</span>
+                                </div>
+                                <select name="modifyEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[0] }}. {{event[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Event Name</span>
@@ -538,6 +624,18 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify Visitor</span>
+                                </div>
+                                <select name="modifyVisitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for visitor in visitors %}
+                                    <option>{{ visitor[0] }}. {{ visitor[1]}} {{ visitor[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">First Name</span>
@@ -621,6 +719,18 @@
                         <form method="POST">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
+                                </div>
+                                <select name="modifyExhibitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for exhibitor in exhibitors %}
+                                    <option>{{ exhibitor[0] }}. {{ exhibitor[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor Name</span>
                                 </div>
                                 <input name="exhibitorName" type="text" class="form-control" aria-label="Default"
@@ -700,7 +810,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="addBooking" tabindex="-1" role="dialog" aria-labelledby="addBookingLabel"
+        <div class="modal fade" id="addBookingModal" tabindex="-1" role="dialog" aria-labelledby="addBookingLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -712,6 +822,22 @@
                     </div>
                     <div class="modal-body">
                         <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify Booking</span>
+                                </div>
+                                <select name="modifyBooking" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for booking in bookings %}
+                                    <option>{{
+                                        booking[0]}}.
+                                        Event: {{ booking[1] }},
+                                        Exhibitor: {{ booking[2] }}, Stall
+                                        No.: {{ booking[3] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                             <div class="input-group mb-3" id="bookingDate">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Booking Date</span>
@@ -754,6 +880,99 @@
                                 formaction="/addBooking"></input>
                             <input name="btn" type="submit" value="Modify" class="btn btn-danger"
                                 formaction="/updateBooking"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addMegaConsumerModal" tabindex="-1" role="dialog"
+            aria-labelledby="addMegaConsumerLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addMegaConsumerLabel">Add/Modify Mega Consumer Card Transaction</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Modify
+                                        Transaction</span>
+                                </div>
+                                <select name="modifyTransaction" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for transaction in transactions %}
+                                    <option>{{ transaction[0]}}. {{ transaction[1] }} {{ transaction[2] }} at {{
+                                        transaction[3] }} spent {{ transaction[4] }} on {{ transaction[5] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3" id="transactionSpend">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Spend</span>
+                                </div>
+                                <input name="transactionSpend" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Spend Date</span>
+                                </div>
+                                <input name="transactionSpendDate" type="text" class="form-control" aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Payment Method</span>
+                                </div>
+                                <input name="transactionPaymentMethod" type="text" class="form-control"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Event</span>
+                                </div>
+                                <select name="transactionEvent" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for event in events %}
+                                    <option>{{ event[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Exhibitor</span>
+                                </div>
+                                <select name="transactionExhibitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for exhibitor in exhibitors %}
+                                    <option>{{ exhibitor[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Visitor</span>
+                                </div>
+                                <select name="transactionVisitor" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for visitor in visitors %}
+                                    <option>{{ visitor[0]}}. {{ visitor[1] }} {{ visitor[2] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
+                                formaction="/addTransaction">
+                            <input name="btn" type="submit" value="Modify" class="btn btn-danger"
+                                formaction="/updateTransaction"></input>
                         </form>
                     </div>
                 </div>
