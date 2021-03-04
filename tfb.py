@@ -15,6 +15,8 @@ try:
         records=cursor.fetchall()
         return records
     """
+
+    
     def getVenues():
         cursor.execute("SELECT * FROM VENUE")
         venues = cursor.fetchall()
@@ -32,7 +34,7 @@ try:
         return stalls
 
     def getBookings():
-        cursor.execute("SELECT b.id, event_name, exhibitor_name, stall_no from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
+        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
         bookings = cursor.fetchall()
         return bookings
 
@@ -47,9 +49,14 @@ try:
         return visitors
 
     def getExhibitors():
-        cursor.execute("SELECT id, exhibitor_name from exhibitor")
+        cursor.execute("SELECT * from exhibitor")
         exhibitors = cursor.fetchall()
         return exhibitors
+    
+    def getIndustries():
+        cursor.execute("SELECT id, industry_name from industry")
+        industries = cursor.fetchall()
+        return industries
 
     def countryId(country):
         cursor.execute(
@@ -302,6 +309,9 @@ try:
             total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
+
+    
+
 
 
 except Exception as ex:

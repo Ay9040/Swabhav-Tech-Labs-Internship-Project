@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='scripts/bootstrap/dist/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='scripts/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='scripts/bootstrap-social/bootstrap-social.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">-->
+    <title>Industry Wise Booking</title>
+    </head>
+    <style>
+        button {
+            margin: 10px;
+        }
+        @media only screen and (min-width : 1200px) {
+
+            .container { width: 1200px; } 
+
+            }
+
+            .row-header{
+    margin:0px auto;
+    padding:0px ;
+}
+
+.row-content{
+    margin:0px auto;
+    padding:50px 0px 50px 0px;
+    border-bottom:1px ridge;
+    min-height: 400px;
+}
+    </style>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="/"><p>Book</p></a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="/industryBooking"><p class="text-white">  Industry Wise Booking  </p></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/industryBusiness"><p class="text-white">  Industry Wise Business  </p></a></li>
+                </ul>
+            </div>
+        </nav>
+         <ul class="nav nav-tabs">
+            {% for event in events %}
+            {% set i_d = "#" + event[0]|string %}
+            <li class="nav-item">
+              <a class="nav-link active" href={{i_d}}
+                role="tab" data-toggle="tab">{{ event[0]}}. {{ event[1] }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="tab-content">
+            {% for event in events %}
+            <div role="tabpanel" class="tab-pane fade show active" id={{event[0]|string}}>
+                <div class="container">
+                <div class="text-center">
+                    <h2>{{event[1]}}</h2>
+                    <h3 class="col-12">Industries : </h3>
+                </div>
+                    <ul>
+                        {% for industry in industries %}
+                            {% set industry_exhibitors=[] %}
+                            {% for exhibitor in exhibitors %}
+                                {% if exhibitor[8]==industry[0] %} 
+                                    {{ industry_exhibitors.append(exhibitor[0]) |default("", True) }} <!--|default("", True) for removing None-->
+                                {% endif %}
+                            {% endfor %}
+                        <div class="row row-content">
+                            <h4 class="row-header">{{industry[1]}}</h4>
+                            <div class="container">
+                            {% for booking in bookings %}
+                                {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
+                                <div class="row">
+                                    <h5>Exhibitor : {{booking[4]}}</h5>
+                                    <div class="col-12">Stall No: {{booking[5]}}</div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+         <script src="static/scripts/jquery/dist/jquery.slim.min.js"></script>
+         <script src="static/scripts/popper.js/dist/umd/popper.min.js"></script>
+         <script src="static/scripts/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

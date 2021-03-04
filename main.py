@@ -46,6 +46,10 @@ def getAllTransactions():
     transactions = tfb.getTransactions()
     return transactions
 
+def getAllIndustries():
+    industries = tfb.getIndustries()
+    return industries
+
 
 @app.route('/updateVenue', methods=['POST'])
 def updateVenue():
@@ -69,7 +73,8 @@ def addVenue():
     country_id = tfb.countryId(country)
     state_id = tfb.stateId(state, country_id)
     tfb.addVenue(address, city, state_id, country_id)
-    return redirect('/')
+    return render_template("register.html", message="Venue Added Successfully", venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
+                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions())
 
 
 @app.route("/deleteVenue", methods=["POST"])
@@ -299,3 +304,8 @@ def addBooking():
         message = "Stall already Booked"
 
     return redirect('/')
+
+@app.route("/industryBooking",methods=["GET"])
+def indusBook():
+    return render_template('indusBook.html', venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
+                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),industries=getAllIndustries())
