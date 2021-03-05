@@ -85,18 +85,25 @@
                     <h2>{{event[1]}}</h2>
                     <h3 class="col-12">From {{event[3]}} to {{event[4]}}<br><br>Our Mega Consumers : </h3>
                 </div>
-                    <div>
-                        <ol>
+                    <table class="table">
+                        <thead>
+                            <th>Name</th>
+                            <th>Spend</th>
+                        </thead>
+                        <tbody>
+                        
                         {% for mc in megaConsumers %}
                         {% if mc[3]==event[0] %}
-                        <li>
-                        <span>{{mc[0]}} {{mc[1]}}</span>
-                        <div>Spend : {{mc[2]}}</div>
-                        </li>
+                        <tr>
+                        
+                       <td><span>{{mc[0]}} {{mc[1]}}</span></td> 
+                        <td>{{mc[2]}}</td>
+                        
+                    </tr>
                         {% endif %}
                         {% endfor %}
-                        </ol>
-                    </div>
+                    </tbody>
+                    </table>
                 </div>
             </div>
             
