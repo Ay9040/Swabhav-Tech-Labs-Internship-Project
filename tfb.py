@@ -309,6 +309,20 @@ try:
             total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
+     
+    def megaconsumer():
+        query= """SELECT * FROM
+(
+SELECT Visitor.first_name AS NAME , Visitor.last_name AS SURNAME ,SUM(spend) AS TotalAmount
+FROM Visitor INNER JOIN megaconsumercard ON Visitor.id=MegaConsumerCard.visitor_id 
+GROUP BY visitor_id
+) AS VisitorTransactions
+WHERE TotalAmount>=3000
+ORDER BY TotalAmount"""
+        cursor.execute(query)
+        megaconsumerlist=cursor.fetchall()
+        return megaconsumerlist
+    
 
     
 
