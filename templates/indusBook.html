@@ -48,19 +48,15 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/bookingDash">
+                        <p class="text-white"> Booking Details </p>
+                    </a></li>
                     <li class="nav-item active"><a class="nav-link" href="/industryBooking"><p class="text-white">  Industry Wise Booking  </p></a></li>
                     <li class="nav-item"><a class="nav-link" href="/industryBusiness"><p class="text-white">  Industry Wise Business  </p></a></li>
                     <li class="nav-item"><a class="nav-link" href="/megaConsumers"><p class="text-white">  Mega Consumers  </p></a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="/bookingDash">
-                            <p class="text-white"> Booking Details </p>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="/industryBooking">
-                            <p class="text-white"> Industry Wise Booking </p>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="/industryBusiness">
-                            <p class="text-white"> Industry Wise Business </p>
-                        </a></li>
+                    
+                  
                 </ul>
             </div>
         </nav>
@@ -97,6 +93,7 @@
                         </div>
                         <div>
                             {% for industry in industries %}
+                            {% if industry[2]==event[0] %}
                             {% set industry_exhibitors=[] %}
                             {% for exhibitor in exhibitors %}
                             {% if exhibitor[8]==industry[0] %}
@@ -106,17 +103,11 @@
                             {% endfor %}
                             <div class="row row-content">
                                 <h4 class="row-header">{{industry[1]}}</h4>
-                                {% set ns3=namespace(booking_count=0) %}
-                                {% for booking in bookings %}
-                                {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
-                                {% set ns3.booking_count=ns3.booking_count+1 %}
-                                {% endif %}
-                                {% endfor %}
-                                <h5 class="col-12">No of Bookings : {{ns3.booking_count}}</h5>
+                                <h5 class="col-12">No of Bookings : {{industry[3]}}</h5>
                                 <div class="container">
                                     <ol>
                                         {% for booking in bookings %}
-                                        {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
+                                        {% if booking[3] in industry_exhibitors %}
                                         <li class="industry-item">
                                             <div class="row">
                                                 <h6>Exhibitor : {{booking[4]}}</h6>
@@ -131,6 +122,7 @@
                                     </ol>
                                 </div>
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>

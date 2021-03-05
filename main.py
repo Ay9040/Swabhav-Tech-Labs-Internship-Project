@@ -314,7 +314,7 @@ def addBooking():
 @app.route("/industryBooking", methods=["GET"])
 def indusBook():
     return render_template('indusBook.html', venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
-                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),industries=getAllIndustries())
+                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),industries=tfb.bookedIndustries())
 
 
 @app.route("/megaConsumers",methods=["GET"])

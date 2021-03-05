@@ -92,6 +92,18 @@ try:
             "Select id FROM Industry WHERE industry_name='" + industry + "';")
         industry_id = cursor.fetchone()
         return industry_id[0]
+    
+    def bookedIndustries():
+        query="""SELECT industry_id,industry_name,event_id,COUNT(industry_id) AS noBookings FROM industry INNER JOIN  
+        (SELECT event_id,booking.id as booking_id,exhibitor_id,exhibitor_name,company_name,company_description,industry_id 
+        FROM booking INNER JOIN exhibitor ON exhibitor.id=booking.exhibitor_id ) AS exhibitorBookings 
+        ON industry.id=exhibitorBookings.industry_id
+        GROUP BY industry_id,event_id
+        ORDER BY noBookings DESC"""
+        cursor.execute(query)
+        industries=cursor.fetchall()
+        return industries
+
 
     def getIds(tablename):
         cursor.execute("SELECT id FROM "+tablename)
@@ -318,7 +330,6 @@ try:
                     ) AS VisitorTransactions
                     WHERE TotalAmount>=3000
                     ORDER BY TotalAmount"""
-
         cursor.execute(query)
         megaconsumerlist = cursor.fetchall()
         return megaconsumerlist
