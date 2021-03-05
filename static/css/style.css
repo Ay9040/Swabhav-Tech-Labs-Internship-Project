@@ -1,3 +1,8 @@
 button{
     margin: 10px;
 }
+
+ol li.industry-item{
+  padding: 15px;
+  list-style-position: outside;
+}

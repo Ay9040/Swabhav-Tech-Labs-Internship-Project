@@ -34,12 +34,12 @@ try:
         return stalls
 
     def getBookings():
-        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
+        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
         bookings = cursor.fetchall()
         return bookings
 
     def getEvents():
-        cursor.execute("SELECT id, event_name FROM eventtable")
+        cursor.execute("SELECT * FROM eventtable")
         events = cursor.fetchall()
         return events
 

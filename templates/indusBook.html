@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='scripts/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='scripts/bootstrap-social/bootstrap-social.css') }}">
     <!--<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">-->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     <title>Industry Wise Booking</title>
     </head>
     <style>
@@ -77,9 +78,9 @@
                 <div class="container">
                 <div class="text-center">
                     <h2>{{event[1]}}</h2>
-                    <h3 class="col-12">Industries : </h3>
+                    <h3 class="col-12">From {{event[3]}} to {{event[4]}}<br><br>Industries : </h3>
                 </div>
-                    <ul>
+                    <div>
                         {% for industry in industries %}
                             {% set industry_exhibitors=[] %}
                             {% for exhibitor in exhibitors %}
@@ -89,19 +90,32 @@
                             {% endfor %}
                         <div class="row row-content">
                             <h4 class="row-header">{{industry[1]}}</h4>
-                            <div class="container">
+                            {% set ns3=namespace(booking_count=0) %}
                             {% for booking in bookings %}
                                 {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
-                                <div class="row">
-                                    <h5>Exhibitor : {{booking[4]}}</h5>
-                                    <div class="col-12">Stall No: {{booking[5]}}</div>
-                                </div>
+                                    {% set ns3.booking_count=ns3.booking_count+1 %}
                                 {% endif %}
                             {% endfor %}
+                            <h5 class="col-12">No of Bookings : {{ns3.booking_count}}</h5>
+                            <div class="container">
+                            <ol>
+                            {% for booking in bookings %}
+                                {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
+                                <li class="industry-item">
+                                    <div class="row">
+                                    <h6>Exhibitor : {{booking[4]}}</h6>
+                                    <div class="col-12">Stall No: {{booking[5]}}</div>
+                                    <div class="col-12">Company Name : {{booking[6]}}</div>
+                                    <div class="col-12">Company Description : {{booking[7]}}</div>
+                                </div>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ol>
                             </div>
                         </div>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </div>
             </div>
             
