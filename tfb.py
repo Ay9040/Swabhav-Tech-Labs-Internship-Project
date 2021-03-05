@@ -349,6 +349,29 @@ try:
         megaconsumerlist = cursor.fetchall()
         return megaconsumerlist
     
+    def industrybuisness():
+        query="""SELECT Industry.industry_name , industrySum AS BuisnessDone
+                FROM Industry INNER JOIN
+                (
+                SELECT Exhibitor.industry_id AS industry_id,SUM(totalSum) AS industrySum
+                FROM Exhibitor INNER JOIN
+                (
+                SELECT Booking.exhibitor_id AS exhibitor_id,SUM(TotalAmount) AS totalSum
+                FROM Booking INNER JOIN 
+                (SELECT MegaConsumerCard.booking_id, SUM(MegaConsumerCard.spend) AS TotalAmount
+                 FROM MegaConsumerCard
+                 GROUP BY booking_id
+                 ) AS consumerPays ON Booking.id=consumerPays.booking_id
+                 GROUP BY Booking.exhibitor_id
+                 ) AS bookingConsume  ON Exhibitor.id=bookingConsume.exhibitor_id
+                 GROUP BY Exhibitor.industry_id
+                 ) AS exhibitionBusiness
+                 ON Industry.id=exhibitionBusiness.industry_id
+                 LIMIT 10;"""
+        cursor.execute(query)
+        topindustry=cursor.fetchall()
+        return topindustry
+    
 
     
 
