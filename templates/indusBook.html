@@ -46,18 +46,34 @@
                 </ul>
             </div>
         </nav>
+       
          <ul class="nav nav-tabs">
+            {% set ns =namespace(flag=0) %}
             {% for event in events %}
             {% set i_d = "#" + event[0]|string %}
-            <li class="nav-item">
-              <a class="nav-link active" href={{i_d}}
-                role="tab" data-toggle="tab">{{ event[0]}}. {{ event[1] }}</a>
-            </li>
+            {% if ns.flag==0 %}
+                {% set ns.flag=1 %}
+                <li class="nav-item">
+                    <a class="nav-link active" href={{i_d}}
+                    role="tab" data-toggle="tab">{{ event[0]}}. {{ event[1] }}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href={{i_d}}
+                    role="tab" data-toggle="tab">{{ event[0]}}. {{ event[1] }}</a>
+                </li>
+            {% endif %}
             {% endfor %}
         </ul>
         <div class="tab-content">
+            {% set ns2 = namespace(flag=0) %}
             {% for event in events %}
+            {% if ns2.flag==0 %}
             <div role="tabpanel" class="tab-pane fade show active" id={{event[0]|string}}>
+            {% set ns2.flag=1 %}
+            {% else %}
+            <div role="tabpanel" class="tab-pane fade" id={{event[0]|string}}>
+            {% endif %}
                 <div class="container">
                 <div class="text-center">
                     <h2>{{event[1]}}</h2>
@@ -88,6 +104,7 @@
                     </ul>
                 </div>
             </div>
+            
             {% endfor %}
         </div>
          <script src="static/scripts/jquery/dist/jquery.slim.min.js"></script>
