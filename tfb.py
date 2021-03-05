@@ -349,7 +349,7 @@ try:
         megaconsumerlist = cursor.fetchall()
         return megaconsumerlist
     
-    def industrybuisness():
+    def industryBusiness():
         query="""SELECT Industry.industry_name , industrySum AS BuisnessDone
                 FROM Industry INNER JOIN
                 (
