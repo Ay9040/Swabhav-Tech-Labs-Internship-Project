@@ -338,3 +338,11 @@ def megaConsumers():
 @app.route('/bookingDash', methods=['GET'])
 def bookingDash():
     return render_template('bookingDash.html', bookings = getAllBookings())
+
+@app.route('/industryBusiness',methods=['GET'])
+def indusBusi():
+    return renser_template('industryBusiness.html',bookings=tfb.industryBusiness())
+
+
+
+
