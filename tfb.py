@@ -308,7 +308,6 @@ try:
             total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
-<<<<<<< HEAD
      
     def megaconsumer():
         query= """SELECT * FROM
@@ -319,28 +318,14 @@ try:
                     ) AS VisitorTransactions
                     WHERE TotalAmount>=3000
                     ORDER BY TotalAmount"""
-=======
 
-    def megaconsumer():
-        query = """SELECT * FROM
-(
-SELECT Visitor.first_name AS NAME , Visitor.last_name AS SURNAME ,SUM(spend) AS TotalAmount
-FROM Visitor INNER JOIN megaconsumercard ON Visitor.id=MegaConsumerCard.visitor_id 
-GROUP BY visitor_id
-) AS VisitorTransactions
-WHERE TotalAmount>=3000
-ORDER BY TotalAmount"""
->>>>>>> 3cb6af4ffeeffab9d692f2c381848ee569c118d2
         cursor.execute(query)
         megaconsumerlist = cursor.fetchall()
         return megaconsumerlist
-<<<<<<< HEAD
     
 
     
 
-=======
->>>>>>> 3cb6af4ffeeffab9d692f2c381848ee569c118d2
 
 
 except Exception as ex:

@@ -321,7 +321,6 @@ def indusBook():
 def megaConsumers():
     return render_template('megaConsumer.html',events=getAllEvents(),megaConsumers=getAllMegaConsumers(),exhibitors=getAllExhibitors(),
                            stalls=getAllStalls())
-                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(), industries=getAllIndustries())
 
 
 @app.route('/bookingDash', methods=['GET'])
