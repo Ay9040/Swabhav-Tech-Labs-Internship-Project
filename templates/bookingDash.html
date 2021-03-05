@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Booking Details</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="../static/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="/">
+                <p>Book</p>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/bookingDash">
+                            <p class="text-white"> Booking Details </p>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/industryBooking">
+                            <p class="text-white"> Industry Wise Booking </p>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/industryBusiness">
+                            <p class="text-white"> Industry Wise Business </p>
+                        </a></li>
+                </ul>
+            </div>
+        </nav>
+        <h2 style="text-align: center; margin: 20px;">Booking Details</h2>
+        <table class="table">
+            <thead>
+                <th>Exhibitor</th>
+                <th>Event</th>
+                <th>Price</th>
+                <th>Stall No.</th>
+                <th>Stall Size</th>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking[4] }}</td>
+                    <td>{{ booking[2] }}</td>
+                    <td>{{ booking[9] }}</td>
+                    <td>{{ booking[5] }}</td>
+                    <td>{{ booking[8] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+
+</html>
