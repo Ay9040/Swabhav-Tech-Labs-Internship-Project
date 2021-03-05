@@ -120,9 +120,5 @@ CREATE TABLE MegaConsumerCard(
 
 
 INSERT INTO tradefairbooking.country(country_name) SELECT c.Name  FROM world.country c;
-
-
-INSERT INTO state (id,state_name,country_id) VALUES
-	(1, 'Maharashtra', 100),
-	(2, 'Gujrat', 100);
-INSERT INTO industry(industry_name) VALUES("Sport");
+INSERT INTO industry(industry_name) VALUES("Other"),("Sport"),("Technology"),("IT"),("Food"),("Financial Services"),("Defence"),("Automobile"),("Agriculture");
+INSERT INTO state(state_name, country_id) VALUES ('Maharashtra', 100), ("Andhra Pradesh",100),("Arunachal Pradesh",100),("Assam",100),("Bihar",100),("Chhattisgarh",100),("Goa",100),("Gujarat",100),("Haryana",100),("Himachal Pradesh",100),("Jammu and Kashmir",100),("Jharkhand",100),("Karnataka",100),("Kerala",100),("Madhya Pradesh",100),("Manipur",100),("Meghalaya",100),("Mizoram",100),("Nagaland",100),("Odisha",100),("Punjab",100),("Rajasthan",100),("Sikkim",100),("Tamil Nadu",100),("Telangana",100),("Tripura",100),("Uttar Pradesh",100),("Uttarakhand",100),("West Bengal",100),("Andaman and Nicobar Islands",100),("Chandigarh",100),("Dadra and Nagar Haveli",100),("Daman and Diu",100),("Lakshadweep",100),("National Capital Territory of Delhi",100),("Puducherry",100);

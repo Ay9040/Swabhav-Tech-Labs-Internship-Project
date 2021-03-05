@@ -9,13 +9,25 @@ message = ""
 def adminRegister():
     global message
     return render_template("register.html", message=message, venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
-                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions())
+                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),
+                           countries = getAllCountries(), states = getAllStates(), industries = getAllIndustries())
 
 
 def getAllVenues():
     venues = tfb.getVenues()
     return venues
 
+def getAllCountries():
+    countries = tfb.getCountries()
+    return countries
+
+def getAllStates():
+    states = tfb.getStates()
+    return states
+
+def getAllIndustries():
+    industries = tfb.getIndustries()
+    return industries
 
 def getAllStalls():
     stalls = tfb.getStalls()

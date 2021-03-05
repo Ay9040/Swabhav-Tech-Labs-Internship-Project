@@ -458,15 +458,25 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Country Name</span>
                                 </div>
-                                <input name="venueCountry" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="venueCountry" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for country in countries %}
+                                    <option>{{ country[0]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">State Name</span>
                                 </div>
-                                <input name="venueState" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="venueState" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for state in states %}
+                                    <option>{{ state[0]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
                                 formaction="/addVenue"></input>
@@ -795,22 +805,37 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Industry</span>
                                 </div>
-                                <input name="exhibitorIndustry" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="exhibitorIndustry" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for industry in industries %}
+                                    <option>{{ industry[1]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
                                 </div>
-                                <input name="exhibitorCountry" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="exhibitorCountry" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for country in countries %}
+                                    <option>{{ country[0]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">State</span>
                                 </div>
-                                <input name="exhibitorState" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="exhibitorState" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for state in states %}
+                                    <option>{{ state[0]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
                                 formaction="/addExhibitor"></input>
@@ -885,8 +910,13 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-default">Stall No.</span>
                                 </div>
-                                <input name="bookingStall" type="text" class="form-control" aria-label="Default"
-                                    aria-describedby="inputGroup-sizing-default">
+                                <select name="bookingStall" class="custom-select" id="inputGroupSelect01"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                    <option selected>Choose...</option>
+                                    {% for stall in stalls %}
+                                    <option>{{ stall[1]}}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <input name="btn" type="submit" value="Confirm" class="btn btn-danger"
                                 formaction="/addBooking"></input>
