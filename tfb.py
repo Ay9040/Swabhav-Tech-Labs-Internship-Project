@@ -16,7 +16,6 @@ try:
         return records
     """
 
-    
     def getVenues():
         cursor.execute("SELECT * FROM VENUE")
         venues = cursor.fetchall()
@@ -26,7 +25,7 @@ try:
         cursor.execute("SELECT m.id, first_name, last_name, exhibitor_name,spend, spend_date FROM megaconsumercard m LEFT JOIN Visitor v on m.visitor_id=v.id LEFT JOIN booking b on b.id = m.booking_id LEFT JOIN exhibitor e on b.exhibitor_id=e.id;")
         transactions = cursor.fetchall()
         return transactions
-    
+
     def getStalls():
         cursor.execute(
             "SELECT s.id, stall_no, event_name from Stall s LEFT JOIN eventtable e on s.event_id = e.id")
@@ -34,7 +33,7 @@ try:
         return stalls
 
     def getBookings():
-        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description,stall_size from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
+        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description,stall_size, price  from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
         bookings = cursor.fetchall()
         return bookings
 
@@ -52,7 +51,7 @@ try:
         cursor.execute("SELECT * from exhibitor")
         exhibitors = cursor.fetchall()
         return exhibitors
-    
+
     def getIndustries():
         cursor.execute("SELECT id, industry_name from industry")
         industries = cursor.fetchall()
@@ -309,11 +308,9 @@ try:
             total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
-<<<<<<< HEAD
-=======
-     
+
     def megaconsumer():
-        query= """SELECT * FROM
+        query = """SELECT * FROM
 (
 SELECT Visitor.first_name AS NAME , Visitor.last_name AS SURNAME ,SUM(spend) AS TotalAmount
 FROM Visitor INNER JOIN megaconsumercard ON Visitor.id=MegaConsumerCard.visitor_id 
@@ -322,13 +319,8 @@ GROUP BY visitor_id
 WHERE TotalAmount>=3000
 ORDER BY TotalAmount"""
         cursor.execute(query)
-        megaconsumerlist=cursor.fetchall()
+        megaconsumerlist = cursor.fetchall()
         return megaconsumerlist
->>>>>>> 72c26dc6000851b423317f7e64a925eb2a417862
-    
-
-    
-
 
 
 except Exception as ex:

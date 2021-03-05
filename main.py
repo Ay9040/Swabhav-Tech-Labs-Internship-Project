@@ -46,6 +46,7 @@ def getAllTransactions():
     transactions = tfb.getTransactions()
     return transactions
 
+
 def getAllIndustries():
     industries = tfb.getIndustries()
     return industries
@@ -305,7 +306,13 @@ def addBooking():
 
     return redirect('/')
 
-@app.route("/industryBooking",methods=["GET"])
+
+@app.route("/industryBooking", methods=["GET"])
 def indusBook():
     return render_template('indusBook.html', venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
-                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),industries=getAllIndustries())
+                           stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(), industries=getAllIndustries())
+
+
+@app.route('/bookingDash', methods=['GET'])
+def bookingDash():
+    return render_template('bookingDash.html', bookings = getAllBookings())

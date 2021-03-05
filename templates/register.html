@@ -16,7 +16,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-            <!--<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">-->
+        <!--<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">-->
         <title>Admin</title>
     </head>
     <style>
@@ -115,11 +115,20 @@
         </script>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="/"><p>Book</p></a>
+            <a class="navbar-brand" href="/">
+                <p>Book</p>
+            </a>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="/industryBooking"><p class="text-white">  Industry Wise Booking  </p></a></li>
-                    <li class="nav-item"><a class="nav-link" href="/industryBusiness"><p class="text-white">  Industry Wise Business  </p></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bookingDash">
+                            <p class="text-white"> Booking Details </p>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/industryBooking">
+                            <p class="text-white"> Industry Wise Booking </p>
+                        </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/industryBusiness">
+                            <p class="text-white"> Industry Wise Business </p>
+                        </a></li>
                 </ul>
             </div>
         </nav>
