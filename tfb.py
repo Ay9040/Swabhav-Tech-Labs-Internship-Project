@@ -26,7 +26,7 @@ try:
         cursor.execute("SELECT m.id, first_name, last_name, exhibitor_name,spend, spend_date FROM megaconsumercard m LEFT JOIN Visitor v on m.visitor_id=v.id LEFT JOIN booking b on b.id = m.booking_id LEFT JOIN exhibitor e on b.exhibitor_id=e.id;")
         transactions = cursor.fetchall()
         return transactions
-
+    
     def getStalls():
         cursor.execute(
             "SELECT s.id, stall_no, event_name from Stall s LEFT JOIN eventtable e on s.event_id = e.id")
@@ -34,7 +34,7 @@ try:
         return stalls
 
     def getBookings():
-        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
+        cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description,stall_size from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
         bookings = cursor.fetchall()
         return bookings
 
@@ -309,6 +309,7 @@ try:
             total_amount[0])+", event_id="+str(event_id)+", exhibitor_id="+str(exhibitor_id)+" WHERE id="+str(bid)+";"
         cursor.execute(query)
         con.commit()
+    
 
     
 
