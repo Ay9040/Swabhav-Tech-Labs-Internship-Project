@@ -44,6 +44,8 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><a class="nav-link" href="/industryBooking"><p class="text-white">  Industry Wise Booking  </p></a></li>
                     <li class="nav-item"><a class="nav-link" href="/industryBusiness"><p class="text-white">  Industry Wise Business  </p></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><p class="text-white">  Mega Consumers  </p></a></li>
+
                 </ul>
             </div>
         </nav>
@@ -78,44 +80,19 @@
                 <div class="container">
                 <div class="text-center">
                     <h2>{{event[1]}}</h2>
-                    <h3 class="col-12">From {{event[3]}} to {{event[4]}}<br><br>Industries : </h3>
+                    <h3 class="col-12">From {{event[3]}} to {{event[4]}}<br><br>Our Mega Consumers : </h3>
                 </div>
                     <div>
-                        {% for industry in industries %}
-                            {% set industry_exhibitors=[] %}
-                            {% for exhibitor in exhibitors %}
-                                {% if exhibitor[8]==industry[0] %} 
-                                    {{ industry_exhibitors.append(exhibitor[0]) |default("", True) }} <!--|default("", True) for removing None-->
-                                {% endif %}
-                            {% endfor %}
-                        <div class="row row-content">
-                            <h4 class="row-header">{{industry[1]}}</h4>
-                            {% set ns3=namespace(booking_count=0) %}
-                            {% for booking in bookings %}
-                                {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
-                                    {% set ns3.booking_count=ns3.booking_count+1 %}
-                                {% endif %}
-                            {% endfor %}
-                            <h5 class="col-12">No of Bookings : {{ns3.booking_count}}</h5>
-                            <div class="container">
-                            <ol>
-                            {% for booking in bookings %}
-                                {% if booking[1]==event[0] and booking[3] in industry_exhibitors %}
-                                <li class="industry-item">
-                                    <div class="row">
-                                    <h6>Exhibitor : {{booking[4]}}</h6>
-                                    <div class="col-12">Stall No: {{booking[5]}}</div>
-                                    <div class="col-12">Stall Size: {{booking[8]}}</div>
-                                    <div class="col-12">Company Name : {{booking[6]}}</div>
-                                    <div class="col-12">Company Description : {{booking[7]}}</div>
-                                </div>
-                                </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ol>
-                            </div>
-                        </div>
+                        <ol>
+                        {% for mc in megaConsumers %}
+                        {% if mc[3]==event[0] %}
+                        <li>
+                        <span>{{mc[0]}} {{mc[1]}}</span>
+                        <div>Spend : {{mc[2]}}</div>
+                        </li>
+                        {% endif %}
                         {% endfor %}
+                        </ol>
                     </div>
                 </div>
             </div>

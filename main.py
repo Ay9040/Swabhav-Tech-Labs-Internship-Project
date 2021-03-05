@@ -50,6 +50,10 @@ def getAllIndustries():
     industries = tfb.getIndustries()
     return industries
 
+def getAllMegaConsumers():
+    megaconsumers = tfb.megaconsumer()
+    return megaconsumers
+
 
 @app.route('/updateVenue', methods=['POST'])
 def updateVenue():
@@ -309,3 +313,9 @@ def addBooking():
 def indusBook():
     return render_template('indusBook.html', venues=getAllVenues(), events=getAllEvents(), exhibitors=getAllExhibitors(),
                            stalls=getAllStalls(), visitors=getAllVisitors(), bookings=getAllBookings(), transactions=getAllTransactions(),industries=getAllIndustries())
+
+
+@app.route("/megaConsumers",methods=["GET"])
+def megaConsumers():
+    return render_template('megaConsumer.html',events=getAllEvents(),megaConsumers=getAllMegaConsumers(),exhibitors=getAllExhibitors(),
+                           stalls=getAllStalls())
