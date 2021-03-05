@@ -32,6 +32,21 @@ try:
         stalls = cursor.fetchall()
         return stalls
 
+    def getCountries():
+        cursor.execute("SELECT country_name from COUNTRY")
+        countries = cursor.fetchall()
+        return countries
+
+    def getStates():
+        cursor.execute("SELECT state_name from STATE")
+        states = cursor.fetchall()
+        return states
+
+    def getIndustries():
+        cursor.execute("SELECT industry_name from INDUSTRY")
+        industries = cursor.fetchall()
+        return industries
+
     def getBookings():
         cursor.execute("SELECT b.id,e.id,event_name,exhibitor_id,exhibitor_name,stall_no,company_name,company_description,stall_size, price  from booking b left join eventtable e on b.event_id=e.id left join exhibitor ex on b.exhibitor_id=ex.id left join bookingstallmap m on m.booking_id = b.id left join stall s on m.stall_id=s.id")
         bookings = cursor.fetchall()
