@@ -341,7 +341,7 @@ def bookingDash():
 
 @app.route('/industryBusiness',methods=['GET'])
 def indusBusi():
-    return renser_template('industryBusiness.html',bookings=tfb.industryBusiness())
+    return render_template('industryBusiness.html',bookings =tfb.industryBusiness())
 
 
 
