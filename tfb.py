@@ -74,7 +74,7 @@ try:
 
     def countryId(country):
         cursor.execute(
-            "SELECT id FROM Country WHERE country_name='"+country+"';")
+            "SELECT id FROM Country WHERE country_name=?"+";", (country, ))
         country_id = cursor.fetchone()
         return country_id[0]
 
